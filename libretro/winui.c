@@ -63,7 +63,11 @@
 #include "tvram.h"
 #include "winui.h"
 
+#if !defined(SF2000)
 #include <dirent.h>
+#else
+#include "../../../dirent.h"
+#endif
 #include <sys/stat.h>
 
 #include "fmg_wrap.h"

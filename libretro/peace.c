@@ -89,10 +89,14 @@ struct internal_file
 
 uint32_t FAKE_GetTickCount(void)
 {
+#if !defined(SF2000)
 	struct timeval tv;
 
 	gettimeofday(&tv, 0);
 	return tv.tv_usec / 1000 + tv.tv_sec * 1000;
+#else
+	return 0; 
+#endif
 }
 
 static void *local_lock(void *h)

@@ -81,7 +81,11 @@ uint16_t	VLINE_TOTAL = 567;
 uint32_t	VLINE = 0;
 uint32_t	vline = 0;
 
+#if !defined(SF2000)
 #define SOUNDRATE 44100.0
+#else
+#define SOUNDRATE 11025.0
+#endif
 #define SNDSZ round(SOUNDRATE / FRAMERATE)
 
 static int firstcall          = 1;
@@ -683,10 +687,15 @@ static bool read_m3u(const char *file)
          {
             /* copy path */
             strncpy(disk.path[index], name, sizeof(disk.path[index]));
-
+#if defined(SF2000)
+            log_cb(RETRO_LOG_INFO, "[libretro]: disk.path[index]=%s\n", disk.path[index]);
+#endif
             /* extract base name from path for labels */
             extract_basename(image_label, name, sizeof(image_label));
             strncpy(disk.label[index], image_label, sizeof(disk.label[index]));
+#if defined(SF2000)
+            log_cb(RETRO_LOG_INFO, "[libretro]: disk.label[index]=%s\n", disk.label[index]);
+#endif
          }
 
          index++;
@@ -695,7 +704,9 @@ static bool read_m3u(const char *file)
 
    disk.total_images = index;
    fclose(f);
-
+#if defined(SF2000)   
+   log_cb(RETRO_LOG_INFO, "[libretro]: disk.total_images=%d\n",disk.total_images);
+#endif
    return (disk.total_images != 0);
 }
 
@@ -1491,6 +1502,9 @@ void retro_get_system_av_info(struct retro_system_av_info *info)
    struct retro_system_timing timing = { FRAMERATE, SOUNDRATE };
    info->geometry                    = geom;
    info->timing                      = timing;
+#if defined(SF2000)
+   log_cb(RETRO_LOG_INFO, "[libretro]: fps=%.2f sample_rate=%.2f\n", timing.fps, timing.sample_rate);
+#endif
 }
 
 static void frame_time_cb(retro_usec_t usec)
