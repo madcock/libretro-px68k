@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <math.h>
+#include <strings.h>
 
 #include <libretro.h>
 #include <libretro_core_options.h>

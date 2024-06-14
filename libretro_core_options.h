@@ -156,6 +156,30 @@ struct retro_core_option_definition option_defs_us[] = {
       "Default"
    },
    {
+      "px68k_midi_output",
+      "MIDI Output (Restart)",
+      "Enable software MIDI.",
+      {
+         { "disabled", NULL},
+         { "enabled",  NULL},
+         { NULL,       NULL },
+      },
+      "enabled"
+   },
+   {
+      "px68k_midi_output_type",
+      "MIDI Output Type (Restart)",
+      "Sets MIDI output type.",
+      {
+         { "LA",       NULL },
+         { "GM",       NULL },
+         { "GS",       NULL },
+         { "XG",       NULL },
+         { NULL,       NULL },
+      },
+      "GM"
+   },
+   {
       "px68k_adpcm_vol",
       "ADPCM Volume",
       "Sets the volume of the ADPCM sound channel.",
